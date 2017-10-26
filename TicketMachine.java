@@ -108,9 +108,15 @@ public class TicketMachine
        public int emptyMachine()
     {
          int vaciar;
-         vaciar = total + balance;
-         total = 0;
-         balance = 0;
+         if(balance == 0) {
+             vaciar = total;
+             total = 0;
+        }
+        else {
+            System.out.println("Hay operación en curso no se puede realizar el vaciado ");
+             vaciar = -1;                                                            
+           
+        }
          return vaciar ;
     }
 
