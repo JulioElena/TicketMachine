@@ -19,16 +19,19 @@ public class TicketMachine
     private int total;
     //maquina premiada
     private boolean premio;
+    //numero de billetes
+    private int billete;
 
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost , boolean dapremio)
+    public TicketMachine(int cost , boolean dapremio , int billetePosible)
     {
         price = cost;
         balance = 0;
         total = 0;
         premio = dapremio;
+        billete = billetePosible;
     }
 
     /**
@@ -52,15 +55,17 @@ public class TicketMachine
      * Receive an amount of money from a customer.
      * Check that the amount is sensible.
      */
-    public void insertMoney(int amount)
+     public void insertMoney(int amount)
     {
-        if(amount <= 0) {
-            System.out.println("Use a positive amount rather than: " +
-                amount);
+        if(amount > 0 & billete > 0) {
+            balance = balance + amount;
+        }
+        else if(amount > 0 & billete == 0){
+            System.out.println("lo sentimos esta maquina no tiene mas billetes");
         }
         else {
-            balance = balance + amount;
-
+            System.out.println("Use a positive amount rather than: " +
+                amount);
         }
     }
 
@@ -91,6 +96,7 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
+            billete = billete - 1;
         }
         else if(balance >= price & premio == false){
             System.out.println("##############");
@@ -104,6 +110,7 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
+            billete = billete - 1;
 
         }
         else {
